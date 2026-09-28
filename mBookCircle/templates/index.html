@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mBookCircle — Discover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F4EE; --ink:#20241F; --forest:#2F5D4F; --forest-dark:#1E4237;
+    --line:#DCD5C7; --card:#FFFFFF; --muted:#6B6656;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;}
+  h1,h2,h3,.serif{font-family:'Source Serif 4',serif;}
+
+  header{position:sticky;top:0;background:var(--paper);border-bottom:1px solid var(--line);z-index:10;}
+  .nav{max-width:1160px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .brand{font-family:'Source Serif 4',serif;font-weight:700;font-size:1.3rem;letter-spacing:.2px;}
+  .brand span{color:var(--forest);}
+  .navlinks{display:flex;gap:28px;font-size:.95rem;flex:1;}
+  .navlinks a{color:var(--muted);text-decoration:none;}
+  .navlinks a.active{color:var(--ink);font-weight:600;border-bottom:2px solid var(--forest);padding-bottom:4px;}
+  .langsel{display:flex;gap:4px;border:1px solid var(--line);border-radius:8px;padding:3px;}
+  .langsel button{border:none;background:none;padding:5px 10px;border-radius:6px;font-size:.8rem;cursor:pointer;color:var(--muted);font-family:'In

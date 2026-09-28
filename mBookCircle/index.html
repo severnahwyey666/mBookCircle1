@@ -1,0 +1,2903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>mBookCircle</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    --cream:#f5efe4;
+    --paper:#fbf7ef;
+    --paper-dark:#e8ddca;
+    --ink:#211a15;
+    --muted:#756a5e;
+    --gold:#b58b4d;
+    --wood:#3b2416;
+    --wood2:#5b3922;
+    --wood3:#744a2b;
+}
+
+* {
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body {
+    background:var(--cream);
+    color:var(--ink);
+    font-family:Inter,sans-serif;
+}
+
+button,input,select {
+    font:inherit;
+}
+
+button {
+    cursor:pointer;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+nav {
+    height:76px;
+    padding:0 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(251,247,239,.94);
+    border-bottom:1px solid rgba(60,40,20,.13);
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(15px);
+}
+
+.logo {
+    font-family:"Cormorant Garamond",serif;
+    font-size:32px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.logo span {
+    color:var(--gold);
+}
+
+.nav-right {
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.nav-btn {
+    border:none;
+    background:transparent;
+    padding:10px 14px;
+    border-radius:7px;
+}
+
+.nav-btn:hover {
+    background:var(--paper-dark);
+}
+
+.language {
+    border:1px solid rgba(60,40,20,.18);
+    background:white;
+    padding:9px 11px;
+    border-radius:7px;
+}
+
+.account {
+    border:none;
+    background:var(--ink);
+    color:white;
+    padding:10px 17px;
+    border-radius:7px;
+}
+
+/* =========================
+   PAGES
+========================= */
+
+.page {
+    display:none;
+}
+
+.page.active {
+    display:block;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height:570px;
+    padding:100px 8%;
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    align-items:center;
+    background:
+        radial-gradient(circle at 80% 20%,rgba(181,139,77,.2),transparent 35%),
+        linear-gradient(135deg,#faf5ec,#eadfcd);
+}
+
+.eyebrow {
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-size:11px;
+    color:var(--gold);
+    margin-bottom:22px;
+}
+
+.hero h1 {
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(60px,8vw,105px);
+    line-height:.86;
+    font-weight:600;
+    margin-bottom:30px;
+}
+
+.hero h1 em {
+    color:var(--gold);
+}
+
+.hero p {
+    max-width:600px;
+    color:var(--muted);
+    line-height:1.8;
+}
+
+.search-box {
+    display:flex;
+    max-width:650px;
+    margin-top:32px;
+}
+
+.search-box input {
+    flex:1;
+    padding:17px 20px;
+    border:1px solid rgba(50,30,10,.18);
+    border-right:none;
+    border-radius:9px 0 0 9px;
+    outline:none;
+}
+
+.search-box button {
+    border:none;
+    background:var(--ink);
+    color:white;
+    padding:0 25px;
+    border-radius:0 9px 9px 0;
+}
+
+.hero-library {
+    position:relative;
+    height:400px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-shelf {
+    width:270px;
+    height:330px;
+    background:linear-gradient(90deg,#4b2e1b,#70472b,#432816);
+    border:13px solid #301c10;
+    box-shadow:25px 30px 45px rgba(0,0,0,.25);
+    padding:20px 16px;
+    display:flex;
+    align-items:flex-end;
+    gap:7px;
+}
+
+.hero-book {
+    width:31px;
+    height:220px;
+    border-radius:2px;
+    box-shadow:4px 0 5px rgba(0,0,0,.25);
+}
+
+.hero-book:nth-child(2){height:255px}
+.hero-book:nth-child(3){height:200px}
+.hero-book:nth-child(4){height:275px}
+.hero-book:nth-child(5){height:230px}
+.hero-book:nth-child(6){height:260px}
+
+/* =========================
+   DISCOVER
+========================= */
+
+.section {
+    padding:75px 7%;
+}
+
+.section-title {
+    margin-bottom:35px;
+}
+
+.section-title h2 {
+    font:52px "Cormorant Garamond",serif;
+}
+
+.section-title p {
+    color:var(--muted);
+    margin-top:5px;
+}
+
+.filters {
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-bottom:35px;
+}
+
+.filter {
+    border:1px solid rgba(60,40,20,.15);
+    background:transparent;
+    padding:9px 15px;
+    border-radius:30px;
+}
+
+.filter.active,
+.filter:hover {
+    background:var(--ink);
+    color:white;
+}
+
+.catalog {
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(185px,1fr));
+    gap:30px;
+}
+
+.book-card {
+    background:var(--paper);
+    border:1px solid rgba(60,40,20,.1);
+    border-radius:8px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.book-card:hover {
+    transform:translateY(-8px);
+    box-shadow:0 20px 35px rgba(50,30,15,.15);
+}
+
+.cover-wrap {
+    height:285px;
+    background:#ded3c2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.cover-wrap img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.cover-placeholder {
+    padding:25px;
+    text-align:center;
+    font:28px "Cormorant Garamond";
+    color:#ead9bd;
+    background:linear-gradient(145deg,#4a3021,#21150e);
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.book-info {
+    padding:17px;
+}
+
+.book-info h3 {
+    font:23px "Cormorant Garamond";
+    line-height:1;
+    margin-bottom:6px;
+}
+
+.author {
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* =========================
+   BOOK MODAL
+========================= */
+
+.overlay {
+    position:fixed;
+    inset:0;
+    background:rgba(20,13,8,.72);
+    z-index:500;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.overlay.show {
+    display:flex;
+}
+
+.modal {
+    background:var(--paper);
+    width:min(900px,100%);
+    max-height:90vh;
+    overflow:auto;
+    border-radius:12px;
+    padding:42px;
+    position:relative;
+}
+
+.close {
+    position:absolute;
+    right:20px;
+    top:15px;
+    border:none;
+    background:none;
+    font-size:28px;
+}
+
+.book-detail {
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:42px;
+}
+
+.detail-cover {
+    height:390px;
+    background:#ded3c2;
+}
+
+.detail-cover img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.detail-content h2 {
+    font:55px "Cormorant Garamond";
+    line-height:.95;
+}
+
+.detail-content h4 {
+    color:var(--muted);
+    font-weight:400;
+    margin:10px 0 25px;
+}
+
+.description {
+    line-height:1.8;
+    color:#655a4f;
+    margin-bottom:28px;
+}
+
+.primary {
+    background:var(--ink);
+    color:white;
+    border:none;
+    border-radius:7px;
+    padding:13px 20px;
+}
+
+.secondary {
+    background:white;
+    border:1px solid rgba(50,30,10,.17);
+    border-radius:7px;
+    padding:13px 20px;
+}
+
+/* =========================
+   LIBRARY HEADER
+========================= */
+
+.library-header {
+    padding:65px 7% 40px;
+    background:
+        radial-gradient(circle at 85% 20%,rgba(181,139,77,.16),transparent 30%),
+        var(--paper);
+}
+
+.profile {
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+.avatar {
+    width:92px;
+    height:92px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#d5c6af;
+}
+
+.profile h1 {
+    font:48px "Cormorant Garamond";
+}
+
+.profile p {
+    color:var(--muted);
+}
+
+.stats {
+    display:flex;
+    gap:50px;
+    margin-top:35px;
+    flex-wrap:wrap;
+}
+
+.stat strong {
+    display:block;
+    font:34px "Cormorant Garamond";
+}
+
+.stat span {
+    font-size:10px;
+    letter-spacing:1.5px;
+    color:var(--muted);
+}
+
+/* =========================
+   LIBRARY TABS
+========================= */
+
+.library-tabs {
+    padding:22px 7%;
+    background:#e9ddca;
+    display:flex;
+    gap:10px;
+}
+
+.library-tab {
+    border:none;
+    background:transparent;
+    padding:12px 20px;
+    border-radius:7px;
+}
+
+.library-tab.active {
+    background:var(--ink);
+    color:white;
+}
+
+/* =========================
+   LIBRARY ROOM
+========================= */
+
+.library-room {
+    min-height:720px;
+    position:relative;
+    padding:80px 6%;
+    background:
+        radial-gradient(ellipse at center top,rgba(255,207,140,.13),transparent 38%),
+        linear-gradient(90deg,#27170d,#432817 25%,#51311d 50%,#3e2517 75%,#24150c);
+    overflow:hidden;
+}
+
+/* wall texture */
+
+.library-room::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:.16;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 70px,
+            rgba(255,255,255,.06) 71px,
+            transparent 73px
+        );
+    pointer-events:none;
+}
+
+.room-heading {
+    position:relative;
+    text-align:center;
+    color:#ead7b8;
+    font:48px "Cormorant Garamond";
+    margin-bottom:50px;
+}
+
+.room {
+    position:relative;
+    max-width:1150px;
+    margin:auto;
+}
+
+/* tall side panels */
+
+.bookcase {
+    background:
+        linear-gradient(
+            90deg,
+            #29170c,
+            #5b351e 8%,
+            #774b2a 12%,
+            #432516 88%,
+            #6c4325 92%,
+            #28160c
+        );
+    padding:32px 35px 0;
+    border:14px solid #24140a;
+    box-shadow:
+        0 30px 55px rgba(0,0,0,.5),
+        inset 0 0 20px rgba(0,0,0,.4);
+}
+
+/* individual shelf */
+
+.real-shelf {
+    min-height:245px;
+    display:flex;
+    align-items:flex-end;
+    gap:8px;
+    padding:20px 22px 0;
+    border-bottom:19px solid #28160b;
+    box-shadow:0 8px 8px rgba(0,0,0,.25);
+}
+
+.real-shelf.empty {
+    align-items:center;
+    justify-content:center;
+}
+
+.empty-text {
+    color:rgba(247,222,185,.62);
+    font:26px "Cormorant Garamond";
+    padding-bottom:35px;
+    text-align:center;
+}
+
+.shelf-book {
+    position:relative;
+    width:58px;
+    min-width:58px;
+    height:205px;
+    overflow:hidden;
+    border-radius:2px 4px 2px 2px;
+    cursor:pointer;
+    transition:.25s;
+    box-shadow:
+        4px 0 7px rgba(0,0,0,.35),
+        inset 4px 0 0 rgba(255,255,255,.09);
+}
+
+.shelf-book:hover {
+    transform:translateY(-17px);
+}
+
+.shelf-book img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.shelf-book.small {
+    height:175px;
+}
+
+.shelf-book.tall {
+    height:230px;
+}
+
+/* room objects */
+
+.reading-chair {
+    width:180px;
+    height:150px;
+    margin:55px auto 0;
+    position:relative;
+}
+
+.chair-seat {
+    width:180px;
+    height:75px;
+    background:#382016;
+    border-radius:40px 40px 12px 12px;
+    box-shadow:0 15px 20px rgba(0,0,0,.3);
+}
+
+.chair-back {
+    width:140px;
+    height:120px;
+    background:#442719;
+    border-radius:60px 60px 15px 15px;
+    position:absolute;
+    left:20px;
+    top:-70px;
+    z-index:-1;
+}
+
+/* =========================
+   ACCOUNT
+========================= */
+
+.form {
+    display:grid;
+    gap:14px;
+}
+
+.form h2 {
+    font:43px "Cormorant Garamond";
+}
+
+.form input {
+    padding:14px;
+    border:1px solid rgba(50,30,10,.16);
+    border-radius:7px;
+    background:white;
+}
+
+.form p {
+    color:var(--muted);
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast {
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:var(--ink);
+    color:white;
+    padding:14px 19px;
+    border-radius:8px;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:1000;
+}
+
+.toast.show {
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px) {
+
+    .hero {
+        grid-template-columns:1fr;
+        padding:70px 7%;
+    }
+
+    .hero-library {
+        display:none;
+    }
+
+    .nav-btn {
+        display:none;
+    }
+
+    .book-detail {
+        grid-template-columns:1fr;
+    }
+
+    .detail-cover {
+        height:330px;
+    }
+
+    .catalog {
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .real-shelf {
+        overflow-x:auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+
+    <div class="logo" onclick="showPage('discover')">
+        m<span>Book</span>Circle
+    </div>
+
+    <div class="nav-right">
+
+        <button class="nav-btn" id="discoverNav" onclick="showPage('discover')">
+            Discover
+        </button>
+
+        <button class="nav-btn" id="libraryNav" onclick="openLibrary()">
+            My Library
+        </button>
+
+        <select id="language" class="language" onchange="setLanguage()">
+            <option value="en">English</option>
+            <option value="uz">Oʻzbekcha</option>
+            <option value="ru">Русский</option>
+        </select>
+
+        <button class="account" id="accountButton" onclick="openAccount()">
+            Account
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     DISCOVER
+========================= -->
+
+<main id="discover" class="page active">
+
+    <section class="hero">
+
+        <div>
+
+            <div class="eyebrow" id="heroEyebrow">
+                A world of books
+            </div>
+
+            <h1 id="heroTitle">
+                Every book<br>
+                has a <em>circle.</em>
+            </h1>
+
+            <p id="heroDescription">
+                Discover books, build your personal library,
+                follow your reading life and find stories worth remembering.
+            </p>
+
+            <div class="search-box">
+
+                <input
+                    id="searchInput"
+                    placeholder="Search books or authors..."
+                    oninput="searchBooks()"
+                >
+
+                <button id="searchButton">
+                    Search
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-library">
+
+            <div class="hero-shelf">
+
+                <div class="hero-book" style="background:#563b29"></div>
+                <div class="hero-book" style="background:#32483e"></div>
+                <div class="hero-book" style="background:#6a2924"></div>
+                <div class="hero-book" style="background:#7b6238"></div>
+                <div class="hero-book" style="background:#283e51"></div>
+                <div class="hero-book" style="background:#5a3d4d"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2 id="catalogTitle">
+                Explore the library.
+            </h2>
+
+            <p id="catalogSubtitle">
+                A growing collection of stories, ideas and worlds.
+            </p>
+
+        </div>
+
+
+        <div class="filters">
+
+            <button class="filter active" data-filter="all">
+                All
+            </button>
+
+            <button class="filter" data-filter="classic">
+                Classics
+            </button>
+
+            <button class="filter" data-filter="russian">
+                Russian Literature
+            </button>
+
+            <button class="filter" data-filter="english">
+                English Literature
+            </button>
+
+            <button class="filter" data-filter="uzbek">
+                Uzbek Literature
+            </button>
+
+            <button class="filter" data-filter="fantasy">
+                Fantasy
+            </button>
+
+            <button class="filter" data-filter="mystery">
+                Mystery
+            </button>
+
+            <button class="filter" data-filter="philosophy">
+                Philosophy
+            </button>
+
+        </div>
+
+
+        <div id="catalog" class="catalog"></div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     MY LIBRARY
+========================= -->
+
+<main id="library" class="page">
+
+    <section class="library-header">
+
+        <div class="profile">
+
+            <img id="avatar" class="avatar">
+
+            <div>
+
+                <h1 id="profileName">
+                    My Library
+                </h1>
+
+                <p id="profileSubtitle">
+                    Your private reading room.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong id="finishedStat">0</strong>
+                <span id="finishedLabel">BOOKS FINISHED</span>
+            </div>
+
+            <div class="stat">
+                <strong id="readingStat">0</strong>
+                <span id="readingLabel">READING NOW</span>
+            </div>
+
+            <div class="stat">
+                <strong id="wantStat">0</strong>
+                <span id="wantLabel">WANT TO READ</span>
+            </div>
+
+            <div class="stat">
+                <strong id="timeStat">0h</strong>
+                <span id="timeLabel">READING TIME</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="library-tabs">
+
+        <button
+            class="library-tab active"
+            onclick="switchShelf('reading',this)"
+            id="readingTab">
+            Currently Reading
+        </button>
+
+        <button
+            class="library-tab"
+            onclick="switchShelf('want',this)"
+            id="wantTab">
+            Want to Read
+        </button>
+
+        <button
+            class="library-tab"
+            onclick="switchShelf('finished',this)"
+            id="finishedTab">
+            Finished
+        </button>
+
+    </div>
+
+
+    <section class="library-room">
+
+        <h2 class="room-heading" id="roomHeading">
+            Currently Reading
+        </h2>
+
+
+        <div class="room">
+
+            <div class="bookcase">
+
+                <div id="realShelf" class="real-shelf empty">
+
+                    <div class="empty-text" id="emptyText">
+                        Your shelf is waiting for its first story.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="reading-chair">
+
+                <div class="chair-back"></div>
+                <div class="chair-seat"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     BOOK MODAL
+========================= -->
+
+<div id="bookOverlay" class="overlay">
+
+    <div class="modal">
+
+        <button class="close" onclick="closeOverlay('bookOverlay')">
+            ×
+        </button>
+
+        <div id="bookDetails"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ACCOUNT MODAL
+========================= -->
+
+<div id="accountOverlay" class="overlay">
+
+    <div class="modal">
+
+        <button class="close" onclick="closeOverlay('accountOverlay')">
+            ×
+        </button>
+
+        <div id="accountContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SHELF CHOOSER
+========================= -->
+
+<div id="shelfOverlay" class="overlay">
+
+    <div class="modal">
+
+        <button class="close" onclick="closeOverlay('shelfOverlay')">
+            ×
+        </button>
+
+        <h2 id="chooseShelfTitle"
+            style="font:45px 'Cormorant Garamond';margin-bottom:10px;">
+            Add to your library
+        </h2>
+
+        <p id="chooseShelfText"
+           style="color:#756a5e;margin-bottom:25px;">
+            Where should this book live?
+        </p>
+
+        <div style="display:grid;gap:12px;">
+
+            <button class="secondary" onclick="addToShelf('reading')" id="chooseReading">
+                Currently Reading
+            </button>
+
+            <button class="secondary" onclick="addToShelf('want')" id="chooseWant">
+                Want to Read
+            </button>
+
+            <button class="secondary" onclick="addToShelf('finished')" id="chooseFinished">
+                Finished
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   BOOK CATALOG
+   The important part:
+   these are BOOK RECORDS, not the final million-book catalog.
+   Later we import a large dataset into the same structure.
+========================================================= */
+
+const books = [
+
+{
+ id:1,
+ title:{
+  en:"Crime and Punishment",
+  uz:"Jinoyat va jazo",
+  ru:"Преступление и наказание"
+ },
+ author:"Fyodor Dostoevsky",
+ categories:["classic","russian"],
+ description:{
+  en:"A psychological novel exploring guilt, morality, poverty and the consequences of a terrible decision.",
+  uz:"Aybdorlik, axloq, qashshoqlik va inson tanlovlarining oqibatlarini o‘rganuvchi psixologik roman.",
+  ru:"Психологический роман о вине, морали, бедности и последствиях человеческого выбора."
+ },
+ coverQuery:"Crime and Punishment Fyodor Dostoevsky"
+},
+
+{
+ id:2,
+ title:{
+  en:"The Brothers Karamazov",
+  uz:"Aka-uka Karamazovlar",
+  ru:"Братья Карамазовы"
+ },
+ author:"Fyodor Dostoevsky",
+ categories:["classic","russian","philosophy"],
+ description:{
+  en:"A vast philosophical family drama exploring faith, doubt, morality and freedom.",
+  uz:"E'tiqod, shubha, axloq va erkinlikni o‘rganuvchi falsafiy oilaviy roman.",
+  ru:"Философский семейный роман о вере, сомнении, морали и свободе."
+ },
+ coverQuery:"The Brothers Karamazov Dostoevsky"
+},
+
+{
+ id:3,
+ title:{
+  en:"The Idiot",
+  uz:"Telba",
+  ru:"Идиот"
+ },
+ author:"Fyodor Dostoevsky",
+ categories:["classic","russian","philosophy"],
+ description:{
+  en:"A philosophical novel examining innocence, compassion, society and human nature.",
+  uz:"Beg‘uborlik, rahm-shafqat, jamiyat va inson tabiatini o‘rganuvchi roman.",
+  ru:"Философский роман о невинности, сострадании, обществе и человеческой природе."
+ },
+ coverQuery:"The Idiot Dostoevsky"
+},
+
+{
+ id:4,
+ title:{
+  en:"Notes from Underground",
+  uz:"Yer ostidan maktublar",
+  ru:"Записки из подполья"
+ },
+ author:"Fyodor Dostoevsky",
+ categories:["classic","russian","philosophy"],
+ description:{
+  en:"A dark philosophical exploration of consciousness, freedom and contradiction.",
+  uz:"Ong, erkinlik va inson ichki ziddiyatlarini o‘rganuvchi falsafiy asar.",
+  ru:"Философское исследование сознания, свободы и человеческих противоречий."
+ },
+ coverQuery:"Notes from Underground Dostoevsky"
+},
+
+{
+ id:5,
+ title:{
+  en:"The Master and Margarita",
+  uz:"Usta va Margarita",
+  ru:"Мастер и Маргарита"
+ },
+ author:"Mikhail Bulgakov",
+ categories:["classic","russian","fantasy"],
+ description:{
+  en:"A mysterious novel blending satire, philosophy, love and the supernatural.",
+  uz:"Satira, falsafa, muhabbat va g‘ayritabiiylikni birlashtirgan sirli roman.",
+  ru:"Таинственный роман, сочетающий сатиру, философию, любовь и мистику."
+ },
+ coverQuery:"The Master and Margarita Bulgakov"
+},
+
+{
+ id:6,
+ title:{
+  en:"War and Peace",
+  uz:"Urush va tinchlik",
+  ru:"Война и мир"
+ },
+ author:"Leo Tolstoy",
+ categories:["classic","russian"],
+ description:{
+  en:"An expansive portrait of families and society during the Napoleonic wars.",
+  uz:"Napoleon urushlari davridagi oilalar va jamiyat hayotining keng tasviri.",
+  ru:"Масштабная картина жизни семей и общества во время Наполеоновских войн."
+ },
+ coverQuery:"War and Peace Tolstoy"
+},
+
+{
+ id:7,
+ title:{
+  en:"Anna Karenina",
+  uz:"Anna Karenina",
+  ru:"Анна Каренина"
+ },
+ author:"Leo Tolstoy",
+ categories:["classic","russian"],
+ description:{
+  en:"A major Russian novel examining love, family, society and personal choices.",
+  uz:"Muhabbat, oila, jamiyat va insoniy tanlovlarni o‘rganuvchi buyuk roman.",
+  ru:"Роман о любви, семье, обществе и человеческом выборе."
+ },
+ coverQuery:"Anna Karenina Tolstoy"
+},
+
+{
+ id:8,
+ title:{
+  en:"Fathers and Sons",
+  uz:"Otalar va bolalar",
+  ru:"Отцы и дети"
+ },
+ author:"Ivan Turgenev",
+ categories:["classic","russian"],
+ description:{
+  en:"A generational novel exploring changing ideas, family and social conflict.",
+  uz:"Avlodlar, o‘zgarayotgan qarashlar, oila va ijtimoiy ziddiyatlar haqidagi roman.",
+  ru:"Роман о поколениях, меняющихся взглядах, семье и общественном конфликте."
+ },
+ coverQuery:"Fathers and Sons Turgenev"
+},
+
+{
+ id:9,
+ title:{
+  en:"Eugene Onegin",
+  uz:"Yevgeniy Onegin",
+  ru:"Евгений Онегин"
+ },
+ author:"Alexander Pushkin",
+ categories:["classic","russian"],
+ description:{
+  en:"A poetic novel about love, society, youth and missed opportunities.",
+  uz:"Muhabbat, jamiyat, yoshlik va qo‘ldan boy berilgan imkoniyatlar haqidagi she'riy roman.",
+  ru:"Роман в стихах о любви, обществе, молодости и упущенных возможностях."
+ },
+ coverQuery:"Eugene Onegin Pushkin"
+},
+
+{
+ id:10,
+ title:{
+  en:"The Cherry Orchard",
+  uz:"Olcha bog‘i",
+  ru:"Вишнёвый сад"
+ },
+ author:"Anton Chekhov",
+ categories:["classic","russian"],
+ description:{
+  en:"A celebrated play about change, memory, family and a disappearing way of life.",
+  uz:"O‘zgarish, xotira, oila va yo‘qolib borayotgan hayot tarzi haqidagi mashhur drama.",
+  ru:"Знаменитая пьеса об изменениях, памяти, семье и уходящей эпохе."
+ },
+ coverQuery:"The Cherry Orchard Chekhov"
+},
+
+{
+ id:11,
+ title:{
+  en:"Jane Eyre",
+  uz:"Jeyn Eyr",
+  ru:"Джейн Эйр"
+ },
+ author:"Charlotte Brontë",
+ categories:["classic","english"],
+ description:{
+  en:"A coming-of-age novel about independence, dignity, identity and belonging.",
+  uz:"Mustaqillik, qadr-qimmat, shaxsiyat va o‘z o‘rnini topish haqidagi roman.",
+  ru:"Роман о независимости, достоинстве, личности и поиске своего места."
+ },
+ coverQuery:"Jane Eyre Charlotte Bronte"
+},
+
+{
+ id:12,
+ title:{
+  en:"Pride and Prejudice",
+  uz:"G‘urur va andisha",
+  ru:"Гордость и предубеждение"
+ },
+ author:"Jane Austen",
+ categories:["classic","english"],
+ description:{
+  en:"A witty novel about relationships, reputation, misunderstanding and society.",
+  uz:"Munosabatlar, obro‘, noto‘g‘ri tushunish va jamiyat haqidagi mashhur roman.",
+  ru:"Ироничный роман об отношениях, репутации, заблуждениях и обществе."
+ },
+ coverQuery:"Pride and Prejudice Jane Austen"
+},
+
+{
+ id:13,
+ title:{
+  en:"Wuthering Heights",
+  uz:"Shamollar vodiysi",
+  ru:"Грозовой перевал"
+ },
+ author:"Emily Brontë",
+ categories:["classic","english"],
+ description:{
+  en:"A dark, atmospheric novel about passion, memory, family and destructive relationships.",
+  uz:"Ehtiros, xotira, oila va murakkab munosabatlar haqidagi qorong‘u, sirli roman.",
+  ru:"Мрачный роман о страсти, памяти, семье и разрушительных отношениях."
+ },
+ coverQuery:"Wuthering Heights Emily Bronte"
+},
+
+{
+ id:14,
+ title:{
+  en:"Great Expectations",
+  uz:"Buyuk umidlar",
+  ru:"Большие надежды"
+ },
+ author:"Charles Dickens",
+ categories:["classic","english"],
+ description:{
+  en:"A young man's journey through ambition, wealth, identity and self-discovery.",
+  uz:"Orzu, boylik, shaxsiyat va o‘zini anglash yo‘lidagi yosh inson hikoyasi.",
+  ru:"История молодого человека, проходящего через амбиции, богатство и самопознание."
+ },
+ coverQuery:"Great Expectations Charles Dickens"
+},
+
+{
+ id:15,
+ title:{
+  en:"Frankenstein",
+  uz:"Frankenshteyn",
+  ru:"Франкенштейн"
+ },
+ author:"Mary Shelley",
+ categories:["classic","fantasy"],
+ description:{
+  en:"A Gothic story about creation, responsibility, isolation and ambition.",
+  uz:"Yaratish, mas'uliyat, yolg‘izlik va shuhratparastlik haqidagi gotik roman.",
+  ru:"Готический роман о создании, ответственности, одиночестве и амбициях."
+ },
+ coverQuery:"Frankenstein Mary Shelley"
+},
+
+{
+ id:16,
+ title:{
+  en:"Dracula",
+  uz:"Drakula",
+  ru:"Дракула"
+ },
+ author:"Bram Stoker",
+ categories:["classic","fantasy"],
+ description:{
+  en:"A Gothic novel of mystery, fear, travel and the supernatural.",
+  uz:"Sir, qo‘rquv, sayohat va g‘ayritabiiy hodisalar haqidagi gotik roman.",
+  ru:"Готический роман о тайне, страхе, путешествиях и сверхъестественном."
+ },
+ coverQuery:"Dracula Bram Stoker"
+},
+
+{
+ id:17,
+ title:{
+  en:"The Picture of Dorian Gray",
+  uz:"Dorian Greyning portreti",
+  ru:"Портрет Дориана Грея"
+ },
+ author:"Oscar Wilde",
+ categories:["classic","english","philosophy"],
+ description:{
+  en:"A novel about beauty, youth, morality and the consequences of one's choices.",
+  uz:"Go‘zallik, yoshlik, axloq va inson tanlovlarining oqibatlari haqidagi roman.",
+  ru:"Роман о красоте, молодости, морали и последствиях человеческого выбора."
+ },
+ coverQuery:"The Picture of Dorian Gray Oscar Wilde"
+},
+
+{
+ id:18,
+ title:{
+  en:"1984",
+  uz:"1984",
+  ru:"1984"
+ },
+ author:"George Orwell",
+ categories:["classic","english","philosophy"],
+ description:{
+  en:"A dystopian novel examining surveillance, power, language and individual freedom.",
+  uz:"Nazorat, hokimiyat, til va shaxsiy erkinlikni o‘rganuvchi distopik roman.",
+  ru:"Антиутопия о контроле, власти, языке и свободе личности."
+ },
+ coverQuery:"1984 George Orwell"
+},
+
+{
+ id:19,
+ title:{
+  en:"Animal Farm",
+  uz:"Molxona",
+  ru:"Скотный двор"
+ },
+ author:"George Orwell",
+ categories:["classic","english","philosophy"],
+ description:{
+  en:"An allegorical story about power, revolution and the transformation of ideals.",
+  uz:"Hokimiyat, inqilob va g‘oyalarning o‘zgarishi haqidagi ramziy asar.",
+  ru:"Аллегорическая история о власти, революции и превращении идеалов."
+ },
+ coverQuery:"Animal Farm George Orwell"
+},
+
+{
+ id:20,
+ title:{
+  en:"The Great Gatsby",
+  uz:"Buyuk Getsbi",
+  ru:"Великий Гэтсби"
+ },
+ author:"F. Scott Fitzgerald",
+ categories:["classic","english"],
+ description:{
+  en:"A novel about ambition, wealth, longing and the American dream.",
+  uz:"Orzu, boylik, intilish va Amerika orzusi haqidagi roman.",
+  ru:"Роман об амбициях, богатстве, стремлении и американской мечте."
+ },
+ coverQuery:"The Great Gatsby Fitzgerald"
+},
+
+{
+ id:21,
+ title:{
+  en:"The Hobbit",
+  uz:"Hobbit",
+  ru:"Хоббит"
+ },
+ author:"J. R. R. Tolkien",
+ categories:["fantasy","english"],
+ description:{
+  en:"A reluctant adventurer leaves home and joins a remarkable journey through Middle-earth.",
+  uz:"Uyidan chiqib, O‘rta Yer bo‘ylab ajoyib sarguzashtga qo‘shilgan qahramon haqidagi hikoya.",
+  ru:"История неожиданного приключения в Средиземье."
+ },
+ coverQuery:"The Hobbit J R R Tolkien"
+},
+
+{
+ id:22,
+ title:{
+  en:"The Lord of the Rings",
+  uz:"Uzuklar hukmdori",
+  ru:"Властелин колец"
+ },
+ author:"J. R. R. Tolkien",
+ categories:["fantasy","english"],
+ description:{
+  en:"An epic fantasy journey involving friendship, courage, power and the fate of Middle-earth.",
+  uz:"Do‘stlik, jasorat, hokimiyat va O‘rta Yer taqdiri haqidagi epik fantastik asar.",
+  ru:"Эпическое фэнтези о дружбе, мужестве, власти и судьбе Средиземья."
+ },
+ coverQuery:"The Lord of the Rings Tolkien"
+},
+
+{
+ id:23,
+ title:{
+  en:"The Little Prince",
+  uz:"Kichkina shahzoda",
+  ru:"Маленький принц"
+ },
+ author:"Antoine de Saint-Exupéry",
+ categories:["classic","fantasy"],
+ description:{
+  en:"A philosophical tale about friendship, responsibility and the way people see the world.",
+  uz:"Do‘stlik, mas'uliyat va insonlarning dunyoni qanday ko‘rishi haqidagi falsafiy ertak.",
+  ru:"Философская сказка о дружбе, ответственности и человеческом взгляде на мир."
+ },
+ coverQuery:"The Little Prince Saint Exupery"
+},
+
+{
+ id:24,
+ title:{
+  en:"The Alchemist",
+  uz:"Alkimyogar",
+  ru:"Алхимик"
+ },
+ author:"Paulo Coelho",
+ categories:["philosophy"],
+ description:{
+  en:"A young shepherd follows a dream while searching for meaning and purpose.",
+  uz:"Yosh cho‘pon tushining ortidan borib, hayot mazmunini izlaydi.",
+  ru:"Молодой пастух следует за своей мечтой в поисках смысла."
+ },
+ coverQuery:"The Alchemist Paulo Coelho"
+},
+
+{
+ id:25,
+ title:{
+  en:"The Stranger",
+  uz:"Begona",
+  ru:"Посторонний"
+ },
+ author:"Albert Camus",
+ categories:["classic","philosophy"],
+ description:{
+  en:"A philosophical novel exploring alienation, meaning and society's expectations.",
+  uz:"Begonalashuv, hayot mazmuni va jamiyat kutgan narsalar haqidagi falsafiy roman.",
+  ru:"Философский роман об отчуждении, смысле и ожиданиях общества."
+ },
+ coverQuery:"The Stranger Albert Camus"
+},
+
+{
+ id:26,
+ title:{
+  en:"The Trial",
+  uz:"Jarayon",
+  ru:"Процесс"
+ },
+ author:"Franz Kafka",
+ categories:["classic","philosophy"],
+ description:{
+  en:"A surreal story about a man trapped in an incomprehensible legal system.",
+  uz:"Tushunarsiz huquqiy tizim ichida qolib ketgan inson haqidagi g‘alati hikoya.",
+  ru:"Абсурдная история человека, оказавшегося в непонятной судебной системе."
+ },
+ coverQuery:"The Trial Franz Kafka"
+},
+
+{
+ id:27,
+ title:{
+  en:"The Metamorphosis",
+  uz:"Evrilish",
+  ru:"Превращение"
+ },
+ author:"Franz Kafka",
+ categories:["classic","philosophy"],
+ description:{
+  en:"A surreal examination of identity, isolation and family relationships.",
+  uz:"Shaxsiyat, yolg‘izlik va oilaviy munosabatlarni o‘rganuvchi ramziy hikoya.",
+  ru:"Абсурдная история о личности, одиночестве и семейных отношениях."
+ },
+ coverQuery:"The Metamorphosis Franz Kafka"
+},
+
+{
+ id:28,
+ title:{
+  en:"The Count of Monte Cristo",
+  uz:"Monte-Kristo grafi",
+  ru:"Граф Монте-Кристо"
+ },
+ author:"Alexandre Dumas",
+ categories:["classic"],
+ description:{
+  en:"An epic adventure of imprisonment, transformation, identity and justice.",
+  uz:"Qamoq, o‘zgarish, shaxsiyat va adolat haqidagi epik sarguzasht.",
+  ru:"Приключенческий роман о заключении, переменах, личности и справедливости."
+ },
+ coverQuery:"The Count of Monte Cristo Alexandre Dumas"
+},
+
+{
+ id:29,
+ title:{
+  en:"Les Misérables",
+  uz:"Xo‘rlanganlar",
+  ru:"Отверженные"
+ },
+ author:"Victor Hugo",
+ categories:["classic"],
+ description:{
+  en:"A sweeping story of justice, poverty, compassion and social change.",
+  uz:"Adolat, qashshoqlik, rahm-shafqat va ijtimoiy o‘zgarishlar haqidagi ulkan roman.",
+  ru:"Масштабный роман о справедливости, бедности, сострадании и переменах."
+ },
+ coverQuery:"Les Miserables Victor Hugo"
+},
+
+{
+ id:30,
+ title:{
+  en:"Don Quixote",
+  uz:"Don Kixot",
+  ru:"Дон Кихот"
+ },
+ author:"Miguel de Cervantes",
+ categories:["classic"],
+ description:{
+  en:"A legendary comic and philosophical adventure about imagination and reality.",
+  uz:"Tasavvur va haqiqat o‘rtasidagi mashhur kulgili va falsafiy sarguzasht.",
+  ru:"Знаменитое приключение о воображении, реальности и человеческих мечтах."
+ },
+ coverQuery:"Don Quixote Cervantes"
+},
+
+{
+ id:31,
+ title:{
+  en:"One Hundred Years of Solitude",
+  uz:"Yolg‘izlikning yuz yili",
+  ru:"Сто лет одиночества"
+ },
+ author:"Gabriel García Márquez",
+ categories:["classic","fantasy"],
+ description:{
+  en:"A multigenerational family saga blending history, memory and magical realism.",
+  uz:"Tarix, xotira va sehrli realizmni birlashtirgan ko‘p avlodli oilaviy saga.",
+  ru:"Семейная сага нескольких поколений, соединяющая историю, память и магический реализм."
+ },
+ coverQuery:"One Hundred Years of Solitude Gabriel Garcia Marquez"
+},
+
+{
+ id:32,
+ title:{
+  en:"The Shadow of the Wind",
+  uz:"Shamol soyasi",
+  ru:"Тень ветра"
+ },
+ author:"Carlos Ruiz Zafón",
+ categories:["mystery","classic"],
+ description:{
+  en:"A young reader discovers a mysterious forgotten novel and begins searching for its author's secrets.",
+  uz:"Yosh kitobxon sirli unutilgan romanni topib, uning muallifi sirlarini izlay boshlaydi.",
+  ru:"Юный читатель находит загадочный забытый роман и начинает искать тайны его автора."
+ },
+ coverQuery:"The Shadow of the Wind Carlos Ruiz Zafon"
+},
+
+{
+ id:33,
+ title:{
+  en:"The Neverending Story",
+  uz:"Tugamas hikoya",
+  ru:"Бесконечная история"
+ },
+ author:"Michael Ende",
+ categories:["fantasy"],
+ description:{
+  en:"A mysterious book draws a young reader into a fantastical world.",
+  uz:"Sirli kitob yosh kitobxonni sehrli dunyoga olib kiradi.",
+  ru:"Таинственная книга переносит юного читателя в фантастический мир."
+ },
+ coverQuery:"The Neverending Story Michael Ende"
+},
+
+{
+ id:34,
+ title:{
+  en:"The Book Thief",
+  uz:"Kitob o‘g‘risi",
+  ru:"Книжный вор"
+ },
+ author:"Markus Zusak",
+ categories:["classic"],
+ description:{
+  en:"A young girl's relationship with books unfolds during wartime Germany.",
+  uz:"Urush davridagi Germaniyada qizaloqning kitoblar bilan munosabati haqida roman.",
+  ru:"История девочки и её любви к книгам в Германии во время войны."
+ },
+ coverQuery:"The Book Thief Markus Zusak"
+},
+
+{
+ id:35,
+ title:{
+  en:"O'tkan Kunlar",
+  uz:"O‘tkan kunlar",
+  ru:"Минувшие дни"
+ },
+ author:"Abdulla Qodiriy",
+ categories:["uzbek","classic"],
+ description:{
+  en:"A landmark Uzbek novel about love, family, society and historical change in nineteenth-century Central Asia.",
+  uz:"XIX asr Turkistonidagi muhabbat, oila, jamiyat va tarixiy o‘zgarishlar haqidagi o‘zbek adabiyotining buyuk asari.",
+  ru:"Знаменитый узбекский роман о любви, семье, обществе и исторических переменах."
+ },
+ coverQuery:"O'tkan Kunlar Abdulla Qodiriy"
+},
+
+{
+ id:36,
+ title:{
+  en:"Mehrobdan Chayon",
+  uz:"Mehrobdan chayon",
+  ru:"Скорпион из алтаря"
+ },
+ author:"Abdulla Qodiriy",
+ categories:["uzbek","classic"],
+ description:{
+  en:"A major work of Uzbek literature depicting social life, love and injustice.",
+  uz:"Ijtimoiy hayot, muhabbat va adolatsizlikni tasvirlovchi mashhur o‘zbek romani.",
+  ru:"Известный узбекский роман о жизни общества, любви и несправедливости."
+ },
+ coverQuery:"Mehrobdan Chayon Abdulla Qodiriy"
+},
+
+{
+ id:37,
+ title:{
+  en:"Kecha va Kunduz",
+  uz:"Kecha va kunduz",
+  ru:"Ночь и день"
+ },
+ author:"Cho‘lpon",
+ categories:["uzbek","classic"],
+ description:{
+  en:"A classic Uzbek novel portraying society, identity and changing times.",
+  uz:"Jamiyat, shaxsiyat va o‘zgarayotgan davrlarni tasvirlovchi klassik o‘zbek romani.",
+  ru:"Классический узбекский роман об обществе, личности и меняющейся эпохе."
+ },
+ coverQuery:"Kecha va Kunduz Cholpon"
+},
+
+{
+ id:38,
+ title:{
+  en:"Ikki Eshik Orasi",
+  uz:"Ikki eshik orasi",
+  ru:"Между двумя дверями"
+ },
+ author:"O‘tkir Hoshimov",
+ categories:["uzbek"],
+ description:{
+  en:"A powerful Uzbek novel about people, family and the difficult turns of life.",
+  uz:"Insonlar, oila va hayotning murakkab burilishlari haqidagi mashhur roman.",
+  ru:"Известный узбекский роман о людях, семье и сложных поворотах жизни."
+ },
+ coverQuery:"Ikki Eshik Orasi Otkir Hoshimov"
+},
+
+{
+ id:39,
+ title:{
+  en:"Otamdan Qolgan Dalalar",
+  uz:"Otamdan qolgan dalalar",
+  ru:"Поля, оставшиеся от отца"
+ },
+ author:"Tog‘ay Murod",
+ categories:["uzbek"],
+ description:{
+  en:"A notable Uzbek literary work reflecting memory, land, family and generations.",
+  uz:"Xotira, yer, oila va avlodlar mavzusini aks ettiruvchi mashhur o‘zbek asari.",
+  ru:"Известное узбекское произведение о памяти, земле, семье и поколениях."
+ },
+ coverQuery:"Otamdan Qolgan Dalalar Togay Murod"
+},
+
+{
+ id:40,
+ title:{
+  en:"The Da Vinci Code",
+  uz:"Da Vinchi siri",
+  ru:"Код да Винчи"
+ },
+ author:"Dan Brown",
+ categories:["mystery"],
+ description:{
+  en:"A fast-paced mystery involving art, symbols, history and hidden clues.",
+  uz:"San'at, ramzlar, tarix va yashirin ishoralar bilan bog‘liq tezkor sirli roman.",
+  ru:"Динамичный детектив об искусстве, символах, истории и скрытых подсказках."
+ },
+ coverQuery:"The Da Vinci Code Dan Brown"
+}
+
+];
+
+
+/* =========================================================
+   TRANSLATIONS
+========================================================= */
+
+const ui = {
+
+en:{
+ discover:"Discover",
+ library:"My Library",
+ account:"Account",
+ heroEyebrow:"A world of books",
+ heroTitle:"Every book<br>has a <em>circle.</em>",
+ heroDescription:"Discover books, build your personal library, follow your reading life and find stories worth remembering.",
+ search:"Search",
+ searchPlaceholder:"Search books or authors...",
+ catalogTitle:"Explore the library.",
+ catalogSubtitle:"A growing collection of stories, ideas and worlds.",
+ all:"All",
+ classic:"Classics",
+ russian:"Russian Literature",
+ english:"English Literature",
+ uzbek:"Uzbek Literature",
+ fantasy:"Fantasy",
+ mystery:"Mystery",
+ philosophy:"Philosophy",
+ profileSubtitle:"Your private reading room.",
+ finished:"Finished",
+ reading:"Currently Reading",
+ want:"Want to Read",
+ finishedStat:"BOOKS FINISHED",
+ readingStat:"READING NOW",
+ wantStat:"WANT TO READ",
+ timeStat:"READING TIME",
+ empty:"Your shelf is waiting for its first story.",
+ add:"Add to My Library",
+ choose:"Add to your library",
+ chooseText:"Where should this book live?",
+ welcome:"Welcome to mBookCircle.",
+ create:"Create your circle.",
+ firstName:"First name",
+ lastName:"Last name",
+ email:"Email",
+ password:"Password",
+ createAccount:"Create Account",
+ signIn:"Sign In",
+ already:"Already have an account? Sign in.",
+ newUser:"New to mBookCircle? Create an account."
+},
+
+uz:{
+ discover:"Kashf etish",
+ library:"Mening kutubxonam",
+ account:"Profil",
+ heroEyebrow:"Kitoblar olami",
+ heroTitle:"Har bir kitobning<br>o‘z <em>doirasi bor.</em>",
+ heroDescription:"Kitoblarni kashf eting, shaxsiy kutubxonangizni yarating va o‘qish hayotingizni kuzating.",
+ search:"Qidirish",
+ searchPlaceholder:"Kitob yoki muallif qidiring...",
+ catalogTitle:"Kutubxonani kashf eting.",
+ catalogSubtitle:"Hikoyalar, g‘oyalar va olamlardan iborat o‘sib borayotgan to‘plam.",
+ all:"Barchasi",
+ classic:"Klassikalar",
+ russian:"Rus adabiyoti",
+ english:"Ingliz adabiyoti",
+ uzbek:"O‘zbek adabiyoti",
+ fantasy:"Fantastika",
+ mystery:"Detektiv",
+ philosophy:"Falsafa",
+ profileSubtitle:"Sizning shaxsiy o‘qish xonangiz.",
+ finished:"Tugatilgan",
+ reading:"Hozir o‘qilmoqda",
+ want:"O‘qimoqchiman",
+ finishedStat:"TUGATILGAN KITOBLAR",
+ readingStat:"HOZIR O‘QILMOQDA",
+ wantStat:"O‘QIMOQCHIMAN",
+ timeStat:"O‘QISH VAQTI",
+ empty:"Sizning javoningiz birinchi hikoyasini kutmoqda.",
+ add:"Kutubxonamga qo‘shish",
+ choose:"Kutubxonangizga qo‘shing",
+ chooseText:"Bu kitob qayerda turishi kerak?",
+ welcome:"mBookCircle'ga xush kelibsiz.",
+ create:"Doirangizni yarating.",
+ firstName:"Ism",
+ lastName:"Familiya",
+ email:"Elektron pochta",
+ password:"Parol",
+ createAccount:"Hisob yaratish",
+ signIn:"Kirish",
+ already:"Hisobingiz bormi? Kiring.",
+ newUser:"mBookCircle'da yangimisiz? Hisob yarating."
+},
+
+ru:{
+ discover:"Обзор",
+ library:"Моя библиотека",
+ account:"Профиль",
+ heroEyebrow:"Мир книг",
+ heroTitle:"У каждой книги<br>есть свой <em>круг.</em>",
+ heroDescription:"Открывайте книги, создавайте личную библиотеку и следите за своей читательской жизнью.",
+ search:"Поиск",
+ searchPlaceholder:"Название книги или автор...",
+ catalogTitle:"Исследуйте библиотеку.",
+ catalogSubtitle:"Растущая коллекция историй, идей и миров.",
+ all:"Все",
+ classic:"Классика",
+ russian:"Русская литература",
+ english:"Английская литература",
+ uzbek:"Узбекская литература",
+ fantasy:"Фэнтези",
+ mystery:"Детектив",
+ philosophy:"Философия",
+ profileSubtitle:"Ваша личная читательская комната.",
+ finished:"Прочитано",
+ reading:"Читаю сейчас",
+ want:"Хочу прочитать",
+ finishedStat:"ПРОЧИТАНО КНИГ",
+ readingStat:"ЧИТАЮ СЕЙЧАС",
+ wantStat:"ХОЧУ ПРОЧИТАТЬ",
+ timeStat:"ВРЕМЯ ЧТЕНИЯ",
+ empty:"Ваша полка ждёт свою первую историю.",
+ add:"Добавить в библиотеку",
+ choose:"Добавить в библиотеку",
+ chooseText:"Где должна находиться эта книга?",
+ welcome:"Добро пожаловать в mBookCircle.",
+ create:"Создайте свой круг.",
+ firstName:"Имя",
+ lastName:"Фамилия",
+ email:"Электронная почта",
+ password:"Пароль",
+ createAccount:"Создать аккаунт",
+ signIn:"Войти",
+ already:"Уже есть аккаунт? Войти.",
+ newUser:"Впервые в mBookCircle? Создайте аккаунт."
+}
+
+};
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let language =
+    localStorage.getItem("mb_language") || "en";
+
+let currentFilter = "all";
+
+let currentShelf = "reading";
+
+let selectedBook = null;
+
+
+/* =========================================================
+   GOOGLE BOOKS COVER LOOKUP
+========================================================= */
+
+async function getCover(book) {
+
+    try {
+
+        const query =
+            encodeURIComponent(book.coverQuery);
+
+        const response =
+            await fetch(
+                `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=1`
+            );
+
+        const data =
+            await response.json();
+
+        if(
+            data.items &&
+            data.items[0] &&
+            data.items[0].volumeInfo &&
+            data.items[0].volumeInfo.imageLinks
+        ) {
+
+            return data.items[0]
+                .volumeInfo
+                .imageLinks
+                .thumbnail
+                .replace("http://","https://");
+
+        }
+
+    } catch(error) {}
+
+    return null;
+}
+
+
+/* =========================================================
+   COVER CACHE
+========================================================= */
+
+async function loadCovers() {
+
+    const cached =
+        JSON.parse(
+            localStorage.getItem("mb_covers") || "{}"
+        );
+
+    for(const book of books) {
+
+        if(!cached[book.id]) {
+
+            const cover =
+                await getCover(book);
+
+            if(cover) {
+
+                cached[book.id] = cover;
+
+                localStorage.setItem(
+                    "mb_covers",
+                    JSON.stringify(cached)
+                );
+
+            }
+        }
+    }
+
+    renderCatalog();
+    renderShelf();
+}
+
+
+/* =========================================================
+   CATALOG RENDER
+========================================================= */
+
+function renderCatalog() {
+
+    const catalog =
+        document.getElementById("catalog");
+
+    let list = books;
+
+    if(currentFilter !== "all") {
+
+        list =
+            books.filter(book =>
+                book.categories.includes(currentFilter)
+            );
+    }
+
+    const query =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if(query) {
+
+        list =
+            list.filter(book => {
+
+                const titles =
+                    Object.values(book.title)
+                    .join(" ")
+                    .toLowerCase();
+
+                return(
+                    titles.includes(query) ||
+                    book.author.toLowerCase().includes(query)
+                );
+
+            });
+
+    }
+
+
+    catalog.innerHTML = "";
+
+    const covers =
+        JSON.parse(
+            localStorage.getItem("mb_covers") || "{}"
+        );
+
+
+    list.forEach(book => {
+
+        const title =
+            book.title[language];
+
+        const card =
+            document.createElement("article");
+
+        card.className = "book-card";
+
+        let coverHTML;
+
+        if(covers[book.id]) {
+
+            coverHTML =
+                `<img src="${covers[book.id]}" alt="${title}">`;
+
+        } else {
+
+            coverHTML =
+                `<div class="cover-placeholder">${title}</div>`;
+
+        }
+
+
+        card.innerHTML = `
+
+            <div class="cover-wrap">
+                ${coverHTML}
+            </div>
+
+            <div class="book-info">
+
+                <h3>${title}</h3>
+
+                <div class="author">
+                    ${book.author}
+                </div>
+
+            </div>
+        `;
+
+        card.onclick =
+            () => openBook(book.id);
+
+        catalog.appendChild(card);
+
+    });
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function searchBooks() {
+
+    renderCatalog();
+
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+document.querySelectorAll(".filter")
+.forEach(button => {
+
+    button.addEventListener("click",() => {
+
+        document.querySelectorAll(".filter")
+        .forEach(b => b.classList.remove("active"));
+
+        button.classList.add("active");
+
+        currentFilter =
+            button.dataset.filter;
+
+        renderCatalog();
+
+    });
+
+});
+
+
+/* =========================================================
+   BOOK DETAILS
+========================================================= */
+
+async function openBook(id) {
+
+    selectedBook =
+        books.find(book => book.id === id);
+
+    const covers =
+        JSON.parse(
+            localStorage.getItem("mb_covers") || "{}"
+        );
+
+    const title =
+        selectedBook.title[language];
+
+    const description =
+        selectedBook.description[language];
+
+    let coverHTML;
+
+    if(covers[id]) {
+
+        coverHTML =
+            `<img src="${covers[id]}" alt="${title}">`;
+
+    } else {
+
+        coverHTML =
+            `<div class="cover-placeholder">${title}</div>`;
+
+    }
+
+
+    document.getElementById("bookDetails").innerHTML = `
+
+        <div class="book-detail">
+
+            <div class="detail-cover">
+                ${coverHTML}
+            </div>
+
+            <div class="detail-content">
+
+                <h2>${title}</h2>
+
+                <h4>${selectedBook.author}</h4>
+
+                <p class="description">
+                    ${description}
+                </p>
+
+                <button
+                    class="primary"
+                    onclick="addBook()">
+                    ${ui[language].add}
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+    document.getElementById("bookOverlay")
+        .classList.add("show");
+}
+
+
+/* =========================================================
+   ACCOUNT
+========================================================= */
+
+function openAccount() {
+
+    const user =
+        JSON.parse(
+            localStorage.getItem("mb_user") || "null"
+        );
+
+    if(user) {
+
+        document.getElementById("accountContent")
+        .innerHTML = `
+
+            <div class="form">
+
+                <h2>
+                    ${ui[language].welcome}
+                </h2>
+
+                <p>
+                    ${user.firstName} ${user.lastName}<br>
+                    ${user.email}
+                </p>
+
+                <button
+                    class="primary"
+                    onclick="
+                        closeOverlay('accountOverlay');
+                        openLibrary();
+                    ">
+                    ${ui[language].library}
+                </button>
+
+                <button
+                    class="secondary"
+                    onclick="logout()">
+                    Sign out
+                </button>
+
+            </div>
+        `;
+
+    } else {
+
+        showSignup();
+
+    }
+
+    document.getElementById("accountOverlay")
+        .classList.add("show");
+}
+
+
+function showSignup() {
+
+    const t = ui[language];
+
+    document.getElementById("accountContent")
+    .innerHTML = `
+
+        <div class="form">
+
+            <h2>${t.create}</h2>
+
+            <input id="firstName"
+                placeholder="${t.firstName}">
+
+            <input id="lastName"
+                placeholder="${t.lastName}">
+
+            <input id="email"
+                type="email"
+                placeholder="${t.email}">
+
+            <input id="password"
+                type="password"
+                placeholder="${t.password}">
+
+            <input id="photo"
+                type="file"
+                accept="image/*">
+
+            <button
+                class="primary"
+                onclick="createAccount()">
+                ${t.createAccount}
+            </button>
+
+            <p
+                style="cursor:pointer"
+                onclick="showLogin()">
+                ${t.already}
+            </p>
+
+        </div>
+    `;
+}
+
+
+function showLogin() {
+
+    const t = ui[language];
+
+    document.getElementById("accountContent")
+    .innerHTML = `
+
+        <div class="form">
+
+            <h2>${t.signIn}</h2>
+
+            <input id="loginEmail"
+                type="email"
+                placeholder="${t.email}">
+
+            <input id="loginPassword"
+                type="password"
+                placeholder="${t.password}">
+
+            <button
+                class="primary"
+                onclick="login()">
+                ${t.signIn}
+            </button>
+
+            <p
+                style="cursor:pointer"
+                onclick="showSignup()">
+                ${t.newUser}
+            </p>
+
+        </div>
+    `;
+}
+
+
+function createAccount() {
+
+    const firstName =
+        document.getElementById("firstName").value.trim();
+
+    const lastName =
+        document.getElementById("lastName").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const photo =
+        document.getElementById("photo").files[0];
+
+
+    if(!firstName || !lastName || !email || !password) {
+
+        toast("Please complete the form.");
+
+        return;
+    }
+
+
+    const save =
+        avatar => {
+
+            localStorage.setItem(
+                "mb_user",
+                JSON.stringify({
+                    firstName,
+                    lastName,
+                    email,
+                    avatar
+                })
+            );
+
+            closeOverlay("accountOverlay");
+
+            toast(ui[language].welcome);
+
+            updateLibrary();
+
+            if(selectedBook) {
+
+                document.getElementById("shelfOverlay")
+                    .classList.add("show");
+            }
+        };
+
+
+    if(photo) {
+
+        const reader =
+            new FileReader();
+
+        reader.onload =
+            () => save(reader.result);
+
+        reader.readAsDataURL(photo);
+
+    } else {
+
+        save("");
+
+    }
+}
+
+
+function login() {
+
+    const email =
+        document.getElementById("loginEmail")
+        .value.trim();
+
+    const user =
+        JSON.parse(
+            localStorage.getItem("mb_user") || "null"
+        );
+
+    if(user && user.email === email) {
+
+        closeOverlay("accountOverlay");
+
+        toast(ui[language].welcome);
+
+    } else {
+
+        toast("Create an account first.");
+
+    }
+}
+
+
+function logout() {
+
+    localStorage.removeItem("mb_user");
+
+    closeOverlay("accountOverlay");
+
+    showPage("discover");
+
+    toast("Signed out.");
+}
+
+
+/* =========================================================
+   ADD BOOK
+========================================================= */
+
+function addBook() {
+
+    const user =
+        localStorage.getItem("mb_user");
+
+    if(!user) {
+
+        closeOverlay("bookOverlay");
+
+        openAccount();
+
+        return;
+    }
+
+    closeOverlay("bookOverlay");
+
+    document.getElementById("shelfOverlay")
+        .classList.add("show");
+}
+
+
+function addToShelf(shelf) {
+
+    if(!selectedBook) return;
+
+    const key =
+        "mb_shelf_" + shelf;
+
+    let list =
+        JSON.parse(
+            localStorage.getItem(key) || "[]"
+        );
+
+    if(!list.includes(selectedBook.id)) {
+
+        list.push(selectedBook.id);
+
+        localStorage.setItem(
+            key,
+            JSON.stringify(list)
+        );
+    }
+
+    closeOverlay("shelfOverlay");
+
+    updateLibrary();
+
+    toast("Book added.");
+}
+
+
+/* =========================================================
+   LIBRARY
+========================================================= */
+
+function openLibrary() {
+
+    if(!localStorage.getItem("mb_user")) {
+
+        openAccount();
+
+        return;
+    }
+
+    showPage("library");
+
+}
+
+
+function switchShelf(shelf,button) {
+
+    currentShelf = shelf;
+
+    document.querySelectorAll(".library-tab")
+    .forEach(b => b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    renderShelf();
+
+}
+
+
+function renderShelf() {
+
+    const shelf =
+        document.getElementById("realShelf");
+
+    const ids =
+        JSON.parse(
+            localStorage.getItem(
+                "mb_shelf_" + currentShelf
+            ) || "[]"
+        );
+
+    const shelfBooks =
+        ids
+        .map(id => books.find(book => book.id === id))
+        .filter(Boolean);
+
+
+    const titles = {
+        reading:ui[language].reading,
+        want:ui[language].want,
+        finished:ui[language].finished
+    };
+
+    document.getElementById("roomHeading")
+        .textContent =
+        titles[currentShelf];
+
+
+    if(!shelfBooks.length) {
+
+        shelf.classList.add("empty");
+
+        shelf.innerHTML = `
+
+            <div class="empty-text">
+                ${ui[language].empty}
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    shelf.classList.remove("empty");
+
+    shelf.innerHTML = "";
+
+
+    const covers =
+        JSON.parse(
+            localStorage.getItem("mb_covers") || "{}"
+        );
+
+
+    shelfBooks.forEach((book,index) => {
+
+        const element =
+            document.createElement("div");
+
+        element.className =
+            "shelf-book " +
+            (index % 3 === 0
+                ? "tall"
+                : index % 3 === 1
+                ? "small"
+                : "");
+
+        if(covers[book.id]) {
+
+            element.innerHTML =
+                `<img src="${covers[book.id]}" alt="">`;
+
+        } else {
+
+            element.style.background =
+                "linear-gradient(145deg,#5a3822,#24150c)";
+
+        }
+
+        element.onclick =
+            () => openBook(book.id);
+
+        shelf.appendChild(element);
+
+    });
+
+}
+
+
+/* =========================================================
+   UPDATE PROFILE
+========================================================= */
+
+function updateLibrary() {
+
+    const user =
+        JSON.parse(
+            localStorage.getItem("mb_user") || "null"
+        );
+
+    if(user) {
+
+        document.getElementById("profileName")
+            .textContent =
+            `${user.firstName} ${user.lastName}`;
+
+        if(user.avatar) {
+
+            document.getElementById("avatar")
+                .src = user.avatar;
+
+        } else {
+
+            document.getElementById("avatar")
+                .src =
+                `https://ui-avatars.com/api/?name=${
+                    encodeURIComponent(
+                        user.firstName + " " + user.lastName
+                    )
+                }`;
+        }
+
+    }
+
+
+    const reading =
+        JSON.parse(
+            localStorage.getItem("mb_shelf_reading") || "[]"
+        );
+
+    const want =
+        JSON.parse(
+            localStorage.getItem("mb_shelf_want") || "[]"
+        );
+
+    const finished =
+        JSON.parse(
+            localStorage.getItem("mb_shelf_finished") || "[]"
+        );
+
+
+    document.getElementById("readingStat")
+        .textContent = reading.length;
+
+    document.getElementById("wantStat")
+        .textContent = want.length;
+
+    document.getElementById("finishedStat")
+        .textContent = finished.length;
+
+    document.getElementById("timeStat")
+        .textContent =
+        (finished.length * 7) + "h";
+
+
+    renderShelf();
+}
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+function setLanguage() {
+
+    language =
+        document.getElementById("language")
+        .value;
+
+    localStorage.setItem(
+        "mb_language",
+        language
+    );
+
+    applyLanguage();
+
+    renderCatalog();
+
+    renderShelf();
+
+}
+
+
+function applyLanguage() {
+
+    const t = ui[language];
+
+    document.getElementById("discoverNav")
+        .textContent = t.discover;
+
+    document.getElementById("libraryNav")
+        .textContent = t.library;
+
+    document.getElementById("accountButton")
+        .textContent = t.account;
+
+    document.getElementById("heroEyebrow")
+        .textContent = t.heroEyebrow;
+
+    document.getElementById("heroTitle")
+        .innerHTML = t.heroTitle;
+
+    document.getElementById("heroDescription")
+        .textContent = t.heroDescription;
+
+    document.getElementById("searchInput")
+        .placeholder = t.searchPlaceholder;
+
+    document.getElementById("searchButton")
+        .textContent = t.search;
+
+    document.getElementById("catalogTitle")
+        .textContent = t.catalogTitle;
+
+    document.getElementById("catalogSubtitle")
+        .textContent = t.catalogSubtitle;
+
+
+    const filters =
+        document.querySelectorAll(".filter");
+
+    const filterTexts = [
+        t.all,
+        t.classic,
+        t.russian,
+        t.english,
+        t.uzbek,
+        t.fantasy,
+        t.mystery,
+        t.philosophy
+    ];
+
+    filters.forEach((button,index) => {
+
+        button.textContent =
+            filterTexts[index];
+
+    });
+
+
+    document.getElementById("profileSubtitle")
+        .textContent = t.profileSubtitle;
+
+    document.getElementById("finishedLabel")
+        .textContent = t.finishedStat;
+
+    document.getElementById("readingLabel")
+        .textContent = t.readingStat;
+
+    document.getElementById("wantLabel")
+        .textContent = t.wantStat;
+
+    document.getElementById("timeLabel")
+        .textContent = t.timeStat;
+
+    document.getElementById("readingTab")
+        .textContent = t.reading;
+
+    document.getElementById("wantTab")
+        .textContent = t.want;
+
+    document.getElementById("finishedTab")
+        .textContent = t.finished;
+
+    document.getElementById("chooseShelfTitle")
+        .textContent = t.choose;
+
+    document.getElementById("chooseShelfText")
+        .textContent = t.chooseText;
+
+    document.getElementById("chooseReading")
+        .textContent = t.reading;
+
+    document.getElementById("chooseWant")
+        .textContent = t.want;
+
+    document.getElementById("chooseFinished")
+        .textContent = t.finished;
+
+}
+
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+function showPage(page) {
+
+    document.querySelectorAll(".page")
+    .forEach(p => p.classList.remove("active"));
+
+    document.getElementById(page)
+        .classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   OVERLAYS
+========================================================= */
+
+function closeOverlay(id) {
+
+    document.getElementById(id)
+        .classList.remove("show");
+
+}
+
+
+document.querySelectorAll(".overlay")
+.forEach(overlay => {
+
+    overlay.addEventListener("click",event => {
+
+        if(event.target === overlay) {
+
+            overlay.classList.remove("show");
+
+        }
+
+    });
+
+});
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(message) {
+
+    const element =
+        document.getElementById("toast");
+
+    element.textContent = message;
+
+    element.classList.add("show");
+
+    setTimeout(
+        () => element.classList.remove("show"),
+        2500
+    );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+document.getElementById("language")
+    .value = language;
+
+applyLanguage();
+
+renderCatalog();
+
+updateLibrary();
+
+loadCovers();
+
+</script>
+
+</body>
+</html>

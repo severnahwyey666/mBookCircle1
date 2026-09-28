@@ -1,0 +1,839 @@
+:root {
+    --cream: #f5f0e6;
+    --cream-dark: #e8dfd0;
+    --text: #2d2a26;
+    --muted: #716b62;
+    --green: #536b58;
+    --green-dark: #34483a;
+    --gold: #b89555;
+    --wood: #76543a;
+    --wood-dark: #3f2b1d;
+}
+
+/* =========================
+   BASIC PAGE
+   ========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background: var(--cream);
+
+    color: var(--text);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+}
+
+
+/* =========================
+   TOP NAVIGATION
+   ========================= */
+
+.topbar {
+    height: 82px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 55px;
+
+    background: rgba(255, 252, 246, 0.94);
+
+    border-bottom: 1px solid #ddd3c4;
+
+    position: relative;
+    z-index: 10;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 270px;
+}
+
+.brand-mark {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--gold);
+
+    color: var(--gold);
+
+    font-size: 20px;
+
+    border-radius: 50%;
+}
+
+.brand-name {
+    font-size: 21px;
+    letter-spacing: 0.5px;
+}
+
+.brand-subtitle {
+    margin-top: 2px;
+
+    font-size: 11px;
+
+    color: var(--muted);
+
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    font-family: Arial, sans-serif;
+}
+
+.navigation {
+    display: flex;
+    gap: 38px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav-link {
+    color: #655f56;
+
+    text-decoration: none;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    position: relative;
+
+    padding: 30px 0;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--green-dark);
+}
+
+.nav-link.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 19px;
+
+    height: 2px;
+
+    background: var(--gold);
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 270px;
+
+    justify-content: flex-end;
+}
+
+.icon-button,
+.language-button,
+.profile-button {
+    border: 1px solid #d7cdbf;
+
+    background: #fffdf9;
+
+    color: var(--text);
+
+    cursor: pointer;
+}
+
+.icon-button {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    font-size: 24px;
+}
+
+.language-button {
+    height: 38px;
+
+    padding: 0 13px;
+
+    border-radius: 20px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+}
+
+.profile-button {
+    height: 40px;
+
+    padding: 0 12px 0 6px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    border-radius: 22px;
+
+    font-family: Arial, sans-serif;
+}
+
+.profile-circle {
+    width: 29px;
+    height: 29px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--green);
+
+    color: white;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   MAIN CONTENT
+   ========================= */
+
+.home {
+    width: 100%;
+}
+
+
+/* =========================
+   HERO
+   ========================= */
+
+.hero {
+    max-width: 1250px;
+
+    min-height: 510px;
+
+    margin: 0 auto;
+
+    padding: 75px 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+}
+
+.hero-text {
+    max-width: 650px;
+}
+
+.eyebrow {
+    color: var(--gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    margin: 0;
+
+    font-size: clamp(50px, 6vw, 82px);
+
+    line-height: 0.98;
+
+    font-weight: normal;
+
+    letter-spacing: -2px;
+}
+
+.hero h1 span {
+    color: var(--green);
+
+    font-style: italic;
+}
+
+.hero-description {
+    max-width: 560px;
+
+    margin: 30px 0;
+
+    color: var(--muted);
+
+    font-family: Arial, sans-serif;
+
+    line-height: 1.7;
+
+    font-size: 16px;
+}
+
+.hero-buttons {
+    display: flex;
+
+    gap: 14px;
+}
+
+.primary-button,
+.secondary-button {
+    padding: 14px 23px;
+
+    border-radius: 4px;
+
+    font-family: Arial, sans-serif;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.primary-button {
+    border: 1px solid var(--gold);
+
+    background: var(--gold);
+
+    color: white;
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+}
+
+.secondary-button {
+    border: 1px solid #cbbda9;
+
+    background: transparent;
+
+    color: var(--green-dark);
+}
+
+.secondary-button:hover {
+    background: #ebe3d6;
+}
+
+
+/* =========================
+   DECORATIVE BOOK
+   ========================= */
+
+.hero-book {
+    width: 250px;
+    height: 310px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    perspective: 1000px;
+}
+
+.book-cover {
+    width: 190px;
+    height: 275px;
+
+    padding: 10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #71876d,
+            #425b48 60%,
+            #26382c
+        );
+
+    border-radius: 3px 9px 9px 3px;
+
+    box-shadow:
+        -14px 18px 30px rgba(60, 45, 30, 0.22),
+        inset 5px 0 0 rgba(255,255,255,0.12);
+
+    transform:
+        rotateY(-16deg)
+        rotateZ(3deg);
+}
+
+.book-cover-inner {
+    height: 100%;
+
+    border: 1px solid rgba(255,255,255,0.45);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    gap: 20px;
+
+    color: white;
+}
+
+.cover-small {
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+}
+
+.cover-title {
+    font-size: 25px;
+
+    line-height: 1.15;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   LIBRARY ROOM PREVIEW
+   ========================= */
+
+.library-preview {
+    max-width: 1350px;
+
+    height: 570px;
+
+    margin: 0 auto 80px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border: 1px solid #cbbca7;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,0.18),
+            transparent 30%,
+            transparent 70%,
+            rgba(0,0,0,0.18)
+        ),
+        #e9dfd0;
+
+    box-shadow:
+        0 35px 80px rgba(65, 50, 35, 0.18);
+}
+
+.room-light {
+    position: absolute;
+
+    width: 700px;
+    height: 450px;
+
+    left: 50%;
+    top: -150px;
+
+    transform: translateX(-50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,248,220,0.8),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   PLANTS
+   ========================= */
+
+.plants {
+    position: absolute;
+
+    top: 10px;
+    left: 7%;
+
+    width: 86%;
+
+    height: 80px;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    pointer-events: none;
+
+    z-index: 5;
+}
+
+.plants span {
+    width: 100px;
+    height: 80px;
+
+    position: relative;
+}
+
+.plants span::before,
+.plants span::after {
+    content: "";
+
+    position: absolute;
+
+    width: 38px;
+    height: 75px;
+
+    background:
+        radial-gradient(
+            ellipse at bottom,
+            #8aa27e,
+            #536b58 65%,
+            transparent 67%
+        );
+
+    border-radius: 80% 15% 80% 15%;
+
+    transform-origin: bottom center;
+}
+
+.plants span::before {
+    left: 20px;
+
+    transform: rotate(-25deg);
+}
+
+.plants span::after {
+    right: 20px;
+
+    transform: rotate(25deg) scaleX(-1);
+}
+
+
+/* =========================
+   HUGE BOOKCASE
+   ========================= */
+
+.bookshelf {
+    position: absolute;
+
+    left: 5%;
+    right: 5%;
+
+    top: 62px;
+    bottom: 35px;
+
+    padding: 30px 25px 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2f2117,
+            #6d4b31 6%,
+            #4a3020 94%,
+            #2a1b12
+        );
+
+    border: 13px solid #2b1c12;
+
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,0.5),
+        0 25px 45px rgba(50,35,20,0.3);
+}
+
+.shelf-row {
+    height: 102px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    padding: 0 20px 9px;
+
+    gap: 9px;
+
+    box-shadow:
+        inset 0 -8px 0 #291a10;
+}
+
+.wooden-divider {
+    height: 14px;
+
+    margin: 0 -2px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #876348,
+            #4b3020 50%,
+            #26170d
+        );
+
+    box-shadow:
+        0 4px 8px rgba(0,0,0,0.35);
+}
+
+
+/* =========================
+   BOOKS
+   ========================= */
+
+.book {
+    width: 27px;
+
+    border-radius: 2px 3px 2px 2px;
+
+    box-shadow:
+        3px 0 4px rgba(0,0,0,0.35);
+
+    position: relative;
+
+    transition:
+        transform 0.25s,
+        filter 0.25s;
+}
+
+.book:hover {
+    transform: translateY(-8px);
+
+    filter: brightness(1.15);
+}
+
+.book::after {
+    content: "";
+
+    position: absolute;
+
+    left: 5px;
+    right: 5px;
+
+    top: 12px;
+
+    height: 1px;
+
+    background: rgba(255,255,255,0.25);
+}
+
+.book-one {
+    height: 82px;
+    background: #76513e;
+}
+
+.book-two {
+    height: 90px;
+    width: 34px;
+    background: #74876a;
+}
+
+.book-three {
+    height: 75px;
+    background: #aa8750;
+}
+
+.book-four {
+    height: 93px;
+    width: 24px;
+    background: #3f5d50;
+}
+
+.book-five {
+    height: 87px;
+    width: 38px;
+    background: #805447;
+}
+
+.book-six {
+    height: 73px;
+    background: #66777a;
+}
+
+.book-seven {
+    height: 94px;
+    width: 31px;
+    background: #a88a58;
+}
+
+.book-eight {
+    height: 91px;
+    width: 31px;
+    background: #5d785b;
+}
+
+.book-nine {
+    height: 77px;
+    background: #94604b;
+}
+
+.book-ten {
+    height: 96px;
+    width: 35px;
+    background: #806545;
+}
+
+.book-eleven {
+    height: 84px;
+    background: #496860;
+}
+
+.book-twelve {
+    height: 98px;
+    width: 27px;
+    background: #875450;
+}
+
+.book-thirteen {
+    height: 72px;
+    background: #b0925e;
+}
+
+.book-fourteen {
+    height: 94px;
+    width: 32px;
+    background: #526e4e;
+}
+
+.book-fifteen {
+    height: 80px;
+    background: #805246;
+}
+
+.book-sixteen {
+    height: 97px;
+    width: 25px;
+    background: #a5824f;
+}
+
+.book-seventeen {
+    height: 74px;
+    width: 38px;
+    background: #607872;
+}
+
+.book-eighteen {
+    height: 92px;
+    background: #79513d;
+}
+
+.book-nineteen {
+    height: 84px;
+    width: 31px;
+    background: #7c9068;
+}
+
+.book-twenty {
+    height: 88px;
+    background: #91634e;
+}
+
+.book-twentyone {
+    height: 97px;
+    width: 34px;
+    background: #5c7657;
+}
+
+.book-twentytwo {
+    height: 76px;
+    background: #a58754;
+}
+
+.book-twentythree {
+    height: 91px;
+    width: 29px;
+    background: #70483f;
+}
+
+.book-twentyfour {
+    height: 82px;
+    background: #48675e;
+}
+
+
+/* =========================
+   THREE.JS LIBRARY
+   ========================= */
+
+#library-3d {
+    width: 100%;
+
+    height: 650px;
+
+    margin-top: 60px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 900px) {
+
+    .topbar {
+        padding: 0 20px;
+    }
+
+    .navigation {
+        display: none;
+    }
+
+    .brand {
+        min-width: auto;
+    }
+
+    .top-actions {
+        min-width: auto;
+    }
+
+    .hero {
+        padding: 55px 30px;
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-book {
+        margin-top: 30px;
+    }
+
+    .library-preview {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
